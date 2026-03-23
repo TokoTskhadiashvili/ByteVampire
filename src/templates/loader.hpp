@@ -4,4 +4,4 @@
 
 #include "template.hpp"
 
-TemplateInformation ParseTemplateFile(const std::string& name);
+ProbeInformation ParseProbeFile(const std::string& name);
