@@ -1,7 +1,7 @@
 #include "loader.hpp"
 
-TemplateInformation ParseTemplateFile(const std::string& name) {
-    TemplateInformation result;
+ProbeInformation ParseProbeFile(const std::string& name) {
+    ProbeInformation result;
 
     try {
         toml::table toml_table = toml::parse_file(name);
@@ -35,7 +35,7 @@ TemplateInformation ParseTemplateFile(const std::string& name) {
                 auto node_table = node.as_table();
                 if (!node_table) { continue; }
 
-                MatchRule match_rule;
+                ProbeMatchRule match_rule;
 
                 if (node_table->contains("regex")) {
                     match_rule.regex = std::regex((*node_table)["regex"].value_or(""), std::regex::ECMAScript | std::regex::optimize);
@@ -63,7 +63,7 @@ TemplateInformation ParseTemplateFile(const std::string& name) {
         }
     }
     catch (const std::exception& e) {
-        std::cerr << "ParseTemplateFile: " << e.what() << std::endl;
+        std::cerr << "ParseProbeFile: " << e.what() << std::endl;
     }
     
     return result;
