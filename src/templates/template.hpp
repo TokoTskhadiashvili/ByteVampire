@@ -8,13 +8,13 @@
 #include <vector>
 #include <regex>
 
-struct MatchRule {
+struct ProbeMatchRule {
     std::string service;
     std::string version;
     std::regex regex;
 };
 
-struct TemplateInformation {
+struct ProbeInformation {
     std::string name;
     char proto[3];
     std::string payload;
@@ -22,5 +22,17 @@ struct TemplateInformation {
     std::vector<unsigned short> plain_ports;
     std::vector<unsigned short> ssl_ports;
 
-    std::vector<MatchRule> rules;
+    std::vector<ProbeMatchRule> rules;
+};
+
+struct ExploitInformation {
+    std::string name;
+
+    std::string service;
+    std::regex version;
+
+    std::string payload;
+    std::regex success_regex;
+
+    bool is_ssl;
 };
